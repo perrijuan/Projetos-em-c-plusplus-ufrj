@@ -1,17 +1,18 @@
-#include <cstdint>
+
+
 #include<stdio.h>
-#include<bits/stdc++.h>
+//#include<bits/stdc++.h>
   
 int fib1(int entrada){
-  //metodo otimizado de forma linear logo ele aceita n > 15
-  static int vet[100]{};
+  //metodo otimizado de forma linear logo ele aceita n > 15 mas n vai pois o vetor está limitado para n "pequeno fora que estamos usando int "
+   static int vet[16];
   int a=0;
   int b=1;
   //usamos a estrutura de decisão for 
   for(int y=0;y<entrada;y++){
-     int aux=a+b;
+      vet[y]=a+b;
     a=b;
-    b=aux;
+    b=vet[y];
     
   }
   return b;
@@ -19,7 +20,6 @@ int fib1(int entrada){
 
 int fibowhile(int entrada){
   //metodo otimizado de forma linear o(n)
-  static int vet[100]{};
   int a=0;
   int b=1;
   int cont=0;
@@ -34,7 +34,6 @@ int fibowhile(int entrada){
 }
 int fibodowhile(int entrada){
   // metodo otimizado de forma linear o(n)
-  static int vet[100]{};
  int a=0;
  int b=1;
  int aux;
@@ -43,7 +42,7 @@ int fibodowhile(int entrada){
   aux=a+b;
   a=b;
   b=aux;
-  
+  cont++;
  }while(cont<entrada);
  return b;
 }
@@ -53,7 +52,7 @@ int tabela(int entrada){
         //pois como o algoritimo é exponencial isso é uma forma de
         //limitar o algoritimo
         //o algoritimo é O(2^n) logo nao está otimizado
-       static int vet[100]={0,1};
+       static int vet[16]={0,1};
 
             if(entrada<2){
                 return vet[entrada];
@@ -67,10 +66,10 @@ int tabela(int entrada){
     int main(){
         
          int y;
-         printf("escolha 1 para fibonacci tabelar recursiva");
-         printf("escolha 2 fibonacci usando for");
-         printf("escolha 3 para fibonacci do-while");
-         printf("escolha 4 para fibonacci usando while");
+         printf("\nescolha 1 para fibonacci tabelar recursiva");
+         printf("\nescolha 2 fibonacci usando for");
+         printf("\nescolha 3 para fibonacci do-while");
+         printf("\nescolha 4 para fibonacci usando while");
          //usando um switch case para escolher o metodo que voce vai usar para a sequencia de fibonacci
          scanf("%d", &y);
         switch (y) { 
@@ -79,40 +78,39 @@ int tabela(int entrada){
           //o programa não vai iniciar se o valor não estiver satisfazendo a variação de entradas suportadas
           do{
           printf("digite um valor entre 5 e 15");
-          scanf("%d",y);
+          scanf("%d",&y);
           }while(y<5||y>15);
             for(int i=0;i<y;i++){
-              printf("os numeros são:%d", fib1(i));
+              printf("os numeros são:%d\n", fib1(i));
             }
             break;
           case 2:
           do{
           printf("digite um valor entre 5 e 15");
-          scanf("%d",y);
+          scanf("%d",&y);
           }while(y<5||y>15);
             for(int i=0;i<y;i++){
-              printf("os numeros são:%d", fibowhile(i));
+              printf("os numeros são:%d\n", fibowhile(i));
             }
             break;
             case 3:
             do{
             printf("digite um valor entre 5 e 15");
-            scanf("%d",y);
+            scanf("%d",&y);
             }while(y<5||y>15);
             for(int i=0;i<y;i++){
-              printf("os numeros são:%d", fibodowhile(i));
+              printf("os numeros são:%d\n", fibodowhile(i));
             }
             break;
             case 4:
             do{
             printf("digite um valor entre 5 e 15");
-            scanf("%d",y);
+            scanf("%d",&y);
             }while(y<5||y>15);
             for(int i=0;i<y;i++){
-              printf("os numeros são:%d", tabela(i));
+              printf("os numeros são:%d\n", tabela(i));
             }
             break;
         }
         return 0;
     }
-
